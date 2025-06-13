@@ -48,7 +48,10 @@ enum class DeviceSerialName(val serialName: String) {
     VERIFONE_UX700("verifoneUX700");
 
     companion object {
-        private val serialNames = DeviceSerialName.entries.associateBy(DeviceSerialName::serialName)
+        // Use values() to get the Array<DeviceSerialName>, then build the map
+        private val serialNames = DeviceSerialName
+            .values()
+            .associateBy { it.serialName }
 
         fun fromSerialName(serialName: String): DeviceSerialName? = serialNames[serialName]
     }
